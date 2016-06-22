@@ -148,3 +148,11 @@ Venue: Burger Continental, 535 S Lake Ave, Pasadena, CA, 91101
 Load up the devserver to check the post, commit if everything looks fine.  
 For more details on arguments to meetup2md.py see the README on Github:  
 http://github.com/omwah/meetup2md/
+
+## Simplified Update freom Meetup
+
+Leveraging Travis-CI we can automate this process once the Meetup event is posted. It is currently configured to pull SGV LUG Meetup events in the month.
+
+bump.sh will change the contents of bump to the current date and time; then commit and push the change. This will trigger a build for Travis-CI. In the .travis.yml file are the steps to pull the Meetup content and push is to the website.
+
+Only the master branch will trigger builds to be published.
