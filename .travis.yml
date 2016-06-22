@@ -16,9 +16,7 @@ script:
   - |
      ./meetup2md/meetup2md.py --config /tmp/.meetup2md.cfg --output-dir content/posts --overwrite --status upcoming --time-range ,1m --group-name SGVTech --name-filter 'SGV Linux Users Group Monthly Meeting' --cleanup '^SGV Linux Users Group Monthly Meeting -' 2>/tmp/meetup2md.2 | grep 'content/posts' | sed 's/ -> //g' > /tmp/meetup.posts
   - |
-     grep -ie error /tmp/meetup2md.2
+     [ ! "$(grep --quiet -ignore-case error /tmp/meetup2md.2)" ] && { cat /tmp/meetup2md.2; exit 1; }
   - |
-     [ -n "$(grep -ie error /tmp/meetup2md.2)" ] && { cat /tmp/meetup2md.2; exit 1; }
-  - |
-     [ -n "$(grep -e 'content/posts' /tmp/meetup.posts)" ] && cat /tmp/meetup.posts || { echo "No new Meetup posts found"; exit 1; }
+     [ "$(grep --quiet 'content/posts' /tmp/meetup.posts)" ] && cat /tmp/meetup.posts || { echo "No new Meetup posts found"; exit 1; }
   - make publish
