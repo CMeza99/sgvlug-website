@@ -15,5 +15,5 @@ install:
 script:
   - ./meetup2md/meetup2md.py --config /tmp/.meetup2md.cfg --status upcoming --time-range ,1m --group-name SGVTech --name-filter 'SGV Linux Users Group Monthly Meeting' --cleanup '^SGV Linux Users Group Monthly Meeting -' 2>/tmp/meetup2md.2 | grep 'content/posts' | sed 's/ -> //g' > /tmp/meetup.posts
   - |-
-    [ "$(grep -E ? /tmp/meetup.posts)" ] && cat /tmp/meetup2md.posts || {echo "No meetup posts found"; exit 1}
+    [ "$(grep -E ? /tmp/meetup.posts)" ] && cat /tmp/meetup2md.posts || { echo "No meetup posts found"; exit 1 }
   - make publish
