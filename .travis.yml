@@ -14,7 +14,7 @@ install:
 - "(cd meetup2md; pip install --requirement requirements.txt)"
 script:
   - |
-     ./meetup2md/meetup2md.py --config /tmp/.meetup2md.cfg --output-dir content/posts --status upcoming --time-range ,1m --group-name SGVTech --name-filter 'SGV Linux Users Group Monthly Meeting' --cleanup '^SGV Linux Users Group Monthly Meeting -' 2>/tmp/meetup2md.2 | grep 'content/posts' | sed 's/ -> //g' > /tmp/meetup.posts
+     ./meetup2md/meetup2md.py --config /tmp/.meetup2md.cfg --output-dir content/posts --overwrite --status upcoming --time-range ,1m --group-name SGVTech --name-filter 'SGV Linux Users Group Monthly Meeting' --cleanup '^SGV Linux Users Group Monthly Meeting -' 2>/tmp/meetup2md.2 | grep 'content/posts' | sed 's/ -> //g' > /tmp/meetup.posts
   - |
      [ "$(grep -ie error /tmp/meetup2md.2)" ] && { cat /tmp/meetup2md.2; exit 1; }
   - |
