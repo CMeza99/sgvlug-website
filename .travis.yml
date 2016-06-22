@@ -3,12 +3,13 @@ python:
   - "2.7"
 before_install:
   - git submodule init && git submodule update
-  - (cd meetup2md/; git submodule init && git submodule update)
+  - (cd meetup2md; git submodule init && git submodule update)
 install:
   - pip install --requirement requirements.txt
-  - pip install --requirement requirements.txt
+  - (cd meetup2md; pip install --requirement requirements.txt)
 script:
-  - ./meetup2md/meetup2md.py -t ,1m -o content/posts 2>/tmp/meetup2md.2 | grep 'content/posts' | sed 's/ -> //g' > /tmp/meetup.posts
+  - ./meetup2md/meetup2md.py --config ~/.meetup2md.cfg --status upcoming --time-range ,1m --group-name SGVTech --name-filter 'SGV Linux Users Group Monthly Meeting' --cleanup '^SGV Linux Users Group Monthly Meeting -'
+  - # ./meetup2md/meetup2md.py -t ,1m -o content/posts 2>/tmp/meetup2md.2 | grep 'content/posts' | sed 's/ -> //g' > /tmp/meetup.posts
   - [ "$(grep -ie error /tmp/meetup2md.2)" ] && {echo /tmp/meetup2md.2; exit 1}
   - [ "$(grep -E ? /tmp/meetup.posts)" ] && cat /tmp/meetup2md.posts || {echo "No meetup posts found"; exit 1}
   - make publish
@@ -18,4 +19,4 @@ after_success:
   - # for post in "$(/tmp/meetup.posts)"; do git add "$post"; git commit "$post" -m "post added via travis-ci"; done
   - # git push
 deploy:
-  - make github
+  - echo 'make github'
