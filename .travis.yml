@@ -20,10 +20,10 @@ script:
 - |-
    (grep --quiet 'content/posts' /tmp/meetup.posts; [ $? -eq 0 ] && cat /tmp/meetup.posts || { echo "No new Meetup posts found"; exit 1; })
 - make publish
-after_success:
-  - # need to create and add github deploy keys
-  - # git add commit git@repo
-  - # for post in "$(/tmp/meetup.posts)"; do git add "$post"; git commit "$post" -m "Post added by S(git log --pretty=format:%cn .bump 2>/dev/null || echo '<Travis CI>')"; done
-  - # git push
+# after_success:
+#   - # need to create and add github deploy keys
+#   - # git add commit git@repo
+#   - # for post in "$(/tmp/meetup.posts)"; do git add "$post"; git commit "$post" -m "Post added by S(git log --pretty=format:%cn .bump 2>/dev/null || echo '<Travis CI>')"; done
+#   - # git push
 deploy:
-  - echo 'make github'
+- echo 'make github'
