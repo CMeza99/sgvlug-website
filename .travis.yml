@@ -12,3 +12,6 @@ before_install:
 install:
 - pip install --requirement requirements.txt
 - "(cd meetup2md; pip install --requirement requirements.txt)"
+script:
+  - ./meetup2md/meetup2md.py --config ~/.meetup2md.cfg --status upcoming --time-range ,1m --group-name SGVTech --name-filter 'SGV Linux Users Group Monthly Meeting' --cleanup '^SGV Linux Users Group Monthly Meeting -'
+  - make publish
