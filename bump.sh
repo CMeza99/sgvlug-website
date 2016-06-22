@@ -25,7 +25,7 @@ if [ ! -z $1 ]; then
   fi
 fi
 
-echo 'Updated:' > $DIR/bump
-date >> $DIR/bump
+echo 'Updated:' > $DIR/.bump
+date >> $DIR/.bump
 
-(cd $DIR; git add bump; git commit bump -m "updated via bump.sh"; git push)
+(cd $DIR; git add .bump; git commit .bump -m "updated via bump.sh"; git push)
