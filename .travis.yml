@@ -18,5 +18,5 @@ script:
   - |
      (grep --quiet --ignore-case error /tmp/meetup2md.2; [ $? -eq 0 ] && { echo 'meetup2md.py error(s):'; cat /tmp/meetup2md.2; exit 1; } || exit 0)
   - |
-     [ "$(grep --quiet 'content/posts' /tmp/meetup.posts)" ] && cat /tmp/meetup.posts || { echo "No new Meetup posts found"; exit 1; }
+     (grep --quiet 'content/posts' /tmp/meetup.posts; [ $? -eq 0 ] && cat /tmp/meetup.posts || { echo "No new Meetup posts found"; exit 1; })
   - make publish
