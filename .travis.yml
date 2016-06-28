@@ -24,6 +24,12 @@ after_success:
 - |-
   git config --global user.email "$(git log -1 --pretty=%ce)"; git config --global user.name "$(git log -1 --pretty=%cn)"; git config --global push.default simple
 - |-
+  git remote set-url --push git@github.com:CMeza99/sgvlug-website.git
+- |-
+  # chmod 400 ~/.ssh/travis-sgvlug-website; eval "$(ssh-agent -s)"; ssh-add ~/.ssh/travis-sgvlug-website
+- |-
+  git remote -v
+- |-
   git add $(grep 'content/posts' /tmp/meetup.posts)
 - |-
   git commit $(grep 'content/posts' /tmp/meetup.posts) --message="travis-ci auto build" && git push
