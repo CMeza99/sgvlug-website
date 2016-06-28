@@ -20,3 +20,7 @@ script:
 - |-
   (grep --quiet 'content/posts' /tmp/meetup.posts; [ $? -eq 0 ] && cat /tmp/meetup.posts || { echo "No new Meetup posts found"; exit 1; })
 - make publish
+after_success:
+- git add $(grep 'content/posts' /tmp/meetup.posts)
+- git commit $(grep 'content/posts' /tmp/meetup.posts) --message="trigged by $(git log -1 --pretty=%cn) -travis-ci"
+- make github
