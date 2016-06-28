@@ -22,8 +22,10 @@ script:
 - make publish
 after_success:
 - |-
+  git config --global user.email "$(git log -1 --pretty=%ce)"; git config --global user.name "$(git log -1 --pretty=%cn)"
+- |-
   git add $(grep 'content/posts' /tmp/meetup.posts)
 - |-
-  git commit $(grep 'content/posts' /tmp/meetup.posts) --message="trigged by $(git log -1 --pretty=%cn) -travis-ci"
+  git commit $(grep 'content/posts' /tmp/meetup.posts) --message="travis-ci auto build" && git push
 - |-
   make github
