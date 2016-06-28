@@ -24,7 +24,7 @@ after_success:
 - |-
   git config --global user.email "$(git log -1 --pretty=%ce)"; git config --global user.name "$(git log -1 --pretty=%cn)"; git config --global push.default simple
 - |-
-  git remote set-url --push git@github.com:CMeza99/sgvlug-website.git
+  git remote set-url --push origin git@github.com:CMeza99/sgvlug-website.git
 - |-
   # chmod 400 ~/.ssh/travis-sgvlug-website; eval "$(ssh-agent -s)"; ssh-add ~/.ssh/travis-sgvlug-website
 - |-
